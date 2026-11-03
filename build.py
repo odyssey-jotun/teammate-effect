@@ -12,7 +12,9 @@ import re
 SITE_NAME = "The Teammate Effect"   # working name, Livia has not chosen one yet
 AUTHOR = "Livia McGraw"
 SITE = "https://odyssey-jotun.github.io/teammate-effect/"
-TODAY = "2026-10-24"
+TODAY = "2026-11-02"
+TALK_DATE = "2026-10-30"
+VIDEO = "videos/talk-story.mp4"
 HANDOUT = "downloads/teammate-handout.pdf"
 CTA = "Download the Teammate Handout"
 
@@ -24,6 +26,8 @@ SOURCES = [
     "Fransen, K., Vanbeselaere, N., De Cuyper, B., Vande Broek, G., &amp; Boen, F. (2014). The myth of the team captain as principal leader: Extending the athlete leadership classification within sport teams. <em>Journal of Sports Sciences, 32</em>(14), 1389&ndash;1397.",
     "Fransen, K., Vanbeselaere, N., De Cuyper, B., Vande Broek, G., &amp; Boen, F. (2015). Perceived sources of team confidence in soccer and basketball. <em>Medicine &amp; Science in Sports &amp; Exercise, 47</em>(7), 1470&ndash;1484.",
     "Furley, P., Moll, T., &amp; Memmert, D. (2015). &ldquo;Put your hands up in the air&rdquo;? The interpersonal effects of pride and shame expressions on opponents and teammates. <em>Frontiers in Psychology, 6</em>, Article 1361.",
+    "McLaren, C. D., &amp; Spink, K. S. (2018). Team member communication and perceived cohesion in youth soccer. <em>Communication &amp; Sport, 6</em>(1), 111&ndash;125.",
+    "Weiss, M. R., Moehnke, H. J., &amp; Kipp, L. E. (2021). A united front: Coach and teammate motivational climate and team cohesion among female adolescent athletes. <em>International Journal of Sports Science &amp; Coaching, 16</em>(4), 875&ndash;885.",
 ]
 
 
@@ -78,9 +82,9 @@ HABITS = [
 ]
 
 STEPS = [
-    ("Pick one habit", "Read the six habits in the free handout and choose the one your team needs first."),
-    ("Fill out a goal card", "Write down one thing you'll do at practice this week, and keep the card in your bag."),
-    ("Watch your team believe", "Enjoy playing on a team that trusts each other and plays better because of it."),
+    ("Download the handout", "It's free: six habits from the research, with goal cards on the last page."),
+    ("Pick one habit", "Write down one thing you'll do at practice this week on a goal card, and keep it in your bag."),
+    ("Enjoy a team that believes", "Play on a team that trusts each other and plays better because of it."),
 ]
 
 
@@ -106,6 +110,10 @@ def page():
          "isPartOf": {"@id": SITE + "#site"}, "author": {"@id": SITE + "#livia"}, "datePublished": TODAY},
         {"@type": "CreativeWork", "name": "How One Teammate Changes a Team", "author": {"@id": SITE + "#livia"},
          "url": SITE + HANDOUT, "encodingFormat": "application/pdf", "isAccessibleForFree": True},
+        {"@type": "VideoObject", "name": "My teammate talk at the basketball academy",
+         "description": "The story I opened my talk with: the day a teammate told me to just pass the ball.",
+         "thumbnailUrl": SITE + "images/talk-poster.webp", "contentUrl": SITE + VIDEO,
+         "uploadDate": TALK_DATE, "duration": "PT1M4S", "author": {"@id": SITE + "#livia"}},
     ]}, separators=(",", ":"))
     problems = "\n".join(f"""      <div class="card">
         <div class="icon">{i}</div>
@@ -124,8 +132,7 @@ def page():
         <p>{p}</p>
       </li>""" for h, p in STEPS)
     refs = "\n".join(f"      <li>{s}</li>" for s in SOURCES)
-    hero_set = "images/hero-team-480.webp 480w, images/hero-team-680.webp 680w, images/hero-team-800.webp 800w"
-    hero_sizes = "(max-width: 860px) min(calc(100vw - 40px), 420px), 440px"
+    hero_set = "images/hero-banner-800.webp 800w, images/hero-banner-1200.webp 1200w, images/hero-banner-1464.webp 1464w"
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,7 +155,8 @@ def page():
 <meta property="og:image:alt" content="The cover of Livia McGraw's handout, How One Teammate Changes a Team">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preload" as="image" type="image/webp" href="images/hero-team-800.webp" imagesrcset="{hero_set}" imagesizes="{hero_sizes}" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="images/hero-banner-1200.webp" imagesrcset="{hero_set}" imagesizes="58vw" media="(min-width: 861px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="images/hero-banner-phone.webp" media="(max-width: 860px)" fetchpriority="high">
 <link rel="preload" href="fonts/barlow-condensed.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/source-sans.woff2" as="font" type="font/woff2" crossorigin>
 <style>{css()}</style>
@@ -162,23 +170,27 @@ def page():
   <div class="wrap">
     <a class="wordmark" href="#main">{MARK}<span>{SITE_NAME}</span></a>
     <ul>
+      <li><a href="#talk">My talk</a></li>
       <li><a href="#habits">The habits</a></li>
       <li><a href="#sources">Research</a></li>
-      <li><a href="{HANDOUT}" download>Handout</a></li>
     </ul>
+    {btn("btn nav-cta")}
   </div>
 </nav>
 
 <main id="main">
 
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
+<header class="banner">
+  <picture>
+    <source media="(max-width: 860px)" srcset="images/hero-banner-phone.webp" width="640" height="800">
+    <img src="images/hero-banner-1200.webp" srcset="{hero_set}" sizes="58vw" width="1200" height="900" alt="A youth basketball team cheering together with their arms in the air" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="wrap">
+    <div class="banner-text">
       <h1>Every player can lead</h1>
-      <p class="lede">A free handout of six teammate habits from real research, made for young athletes.</p>
+      <p class="lede">A free handout of six habits from real research that help young athletes become the teammate everyone wants.</p>
       <div class="btn-row">{btn("btn light")}</div>
     </div>
-    <figure class="hero-photo"><img src="images/hero-team-800.webp" srcset="{hero_set}" sizes="{hero_sizes}" width="800" height="1000" alt="Young girls in navy team jerseys sitting together on a bench, seen from behind" fetchpriority="high" decoding="async"></figure>
   </div>
 </header>
 
@@ -197,16 +209,33 @@ def page():
 <section id="about">
   <div class="wrap split">
     <div class="about-text">
-      <h2>What 14 studies taught me about teammates</h2>
-      <p>I'm {AUTHOR}, and I play tennis. I've had bad teammates, and I know how much one person's attitude can change the way a whole team plays.</p>
-      <p>So I went looking for what the research says. I read 14 peer-reviewed studies on how teammates affect each other's confidence and performance. My favorite followed high school teams, because I could relate to it. The biggest thing I took away is that a teammate's encouragement can matter as much as the coach's, because players listen to people who are more like them.</p>
-      <p>I turned what I learned into six habits a third grader can use, and Coach Young invited me to share them with his teams at the basketball academy. Before this, I coached Pee Wee basketball for two years.</p>
+      <h2>One comment from a teammate changed how I played</h2>
+      <p>In my sophomore year, I played on our basketball team. During a practice scrimmage, I missed a shot, and a teammate snapped, &ldquo;Just pass the ball next time.&rdquo; A few plays later, I had the ball again. I hesitated instead of shooting, because I was scared of missing and being criticized again.</p>
+      <p>I knew I had made a mistake. I didn't need someone on my own team to embarrass me over it.</p>
+      <p>I'm {AUTHOR}. I've played sports since first grade, I play tennis, and I'm president of my school's National Honor Society. I read the peer-reviewed research on how teammates affect each other's confidence, turned it into six habits young players can use, and taught them at a basketball academy.</p>
     </div>
-    <figure class="handout"><img src="images/handout-cover-760.webp" srcset="images/handout-cover-480.webp 480w, images/handout-cover-760.webp 760w" sizes="(max-width: 860px) min(calc(100vw - 40px), 380px), 380px" width="760" height="984" alt="The cover of my handout, How One Teammate Changes a Team, with a youth team cheering above the title" loading="lazy" decoding="async"></figure>
+    <figure class="portrait"><img src="images/livia-760.webp" srcset="images/livia-480.webp 480w, images/livia-760.webp 760w" sizes="(max-width: 860px) min(calc(100vw - 40px), 400px), 440px" width="760" height="950" alt="My senior portrait, sitting on a tree-lined road in a cream sweater and jeans" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 
-<section id="plan" class="band">
+<section id="talk" class="band">
+  <div class="wrap split flip">
+    <figure class="video">
+      <video controls preload="none" playsinline poster="images/talk-poster.webp" width="1280" height="720">
+        <source src="{VIDEO}" type="video/mp4">
+      </video>
+      <figcaption>The story I opened with. Filmed by my mom.</figcaption>
+    </figure>
+    <div class="about-text">
+      <h2>My talk at the basketball academy</h2>
+      <p>On October 30, Coach Young gave me time with a group of young players at the basketball academy. My goal was for every player to leave able to spot two unhelpful teammate behaviors and replace them with a helpful phrase or action.</p>
+      <p>I opened with my scrimmage story. Then we went through what the research says about support and communication, picked out the unhelpful behavior in one movie clip, watched good teamwork in another, and split into three groups to work through game situations.</p>
+      <p>I taught two skills: use helpful words like &ldquo;Next play&rdquo; and &ldquo;What do you need?&rdquo;, and after a mistake, reset and focus on what happens next.</p>
+    </div>
+  </div>
+</section>
+
+<section id="plan">
   <div class="wrap">
     <div class="section-head center">
       <h2>Three steps to becoming the teammate everyone wants</h2>
@@ -219,7 +248,7 @@ def page():
   </div>
 </section>
 
-<section id="habits">
+<section id="habits" class="band">
   <div class="wrap">
     <div class="section-head center">
       <h2>Six habits from the research</h2>
@@ -228,6 +257,7 @@ def page():
     <div class="cards">
 {habits}
     </div>
+    <div class="btn-row">{btn()}</div>
   </div>
 </section>
 
@@ -248,9 +278,9 @@ def page():
       <div class="stake good">
         <h3>When every player leads</h3>
         <ul class="outcomes">
-          <li>{CHECK}<span>Your team believes it can win, and plays like it.</span></li>
-          <li>{CHECK}<span>You know your own actions help decide how your team plays.</span></li>
-          <li>{CHECK}<span>Practice is more fun, because sports are more fun when you like your teammates.</span></li>
+          <li>{CHECK}<span>The team believes it can win, and plays like it.</span></li>
+          <li>{CHECK}<span>Every player knows their actions help decide how the team plays.</span></li>
+          <li>{CHECK}<span>Practice is more fun, because sports are more fun when players like their teammates.</span></li>
         </ul>
       </div>
     </div>
@@ -258,20 +288,23 @@ def page():
 </section>
 
 <section class="closing">
-  <div class="wrap">
-    <h2>Start with one habit at your next practice</h2>
-    <p>The handout is free, with goal cards on the last page.</p>
-    <div class="btn-row">{btn()}</div>
+  <div class="wrap split">
+    <div>
+      <h2>Start with one habit at your next practice</h2>
+      <p>The handout is free, with goal cards on the last page.</p>
+      <div class="btn-row">{btn()}</div>
+    </div>
+    <figure class="handout"><img src="images/handout-cover-760.webp" srcset="images/handout-cover-480.webp 480w, images/handout-cover-760.webp 760w" sizes="(max-width: 860px) min(calc(100vw - 40px), 320px), 360px" width="760" height="984" alt="The cover of my handout, How One Teammate Changes a Team, with a youth team cheering above the title" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 
 <section class="refs" id="sources">
   <div class="wrap">
-    <h2>Research behind the handout</h2>
+    <h2>Research behind the handout and my talk</h2>
     <ol>
 {refs}
     </ol>
-    <p class="cite-line">Photos: Unsplash.</p>
+    <p class="cite-line">Talk video by my mom. Team photos: Unsplash.</p>
   </div>
 </section>
 </main>

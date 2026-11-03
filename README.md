@@ -18,6 +18,7 @@ GitHub Pages serves `main` at root. The page is `noindex,nofollow` and `robots.t
 
 - Styles: `styles.css`, minified and inlined by the build.
 - Images: `python3 tools/images.py` (photos come from the handout's Unsplash set; credits in the handout project's `src/img/CREDITS.md`).
+- Talk video: `videos/talk-story.mp4`, the opening story from Livia's Oct 30, 2026 talk, filmed by her mom. Portrait: `images/livia-*.webp` from her senior photo (sent by Hope). Hero: the handout's cheering-team photo (Unsplash ETwMYXZzwd8).
 - Fonts: Barlow Condensed 700 and Source Sans 3, self-hosted latin subsets from Google Fonts.
 
 ## Rules this page follows
