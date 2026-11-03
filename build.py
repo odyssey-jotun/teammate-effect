@@ -14,7 +14,7 @@ AUTHOR = "Livia McGraw"
 SITE = "https://odyssey-jotun.github.io/teammate-effect/"
 TODAY = "2026-11-02"
 TALK_DATE = "2026-10-30"
-VIDEO = "videos/talk-story.mp4"
+VIDEO = "videos/talk-broll.mp4"
 HANDOUT = "downloads/teammate-handout.pdf"
 CTA = "Download the Teammate Handout"
 
@@ -110,10 +110,10 @@ def page():
          "isPartOf": {"@id": SITE + "#site"}, "author": {"@id": SITE + "#livia"}, "datePublished": TODAY},
         {"@type": "CreativeWork", "name": "How One Teammate Changes a Team", "author": {"@id": SITE + "#livia"},
          "url": SITE + HANDOUT, "encodingFormat": "application/pdf", "isAccessibleForFree": True},
-        {"@type": "VideoObject", "name": "My teammate talk at the basketball academy",
-         "description": "The start of my talk: the two skills we would learn, then the day a teammate told me to just pass the ball.",
+        {"@type": "VideoObject", "name": "Moments from my teammate talk at the basketball academy",
+         "description": "Me teaching two teammate skills to a group of young players at the basketball academy.",
          "thumbnailUrl": SITE + "images/talk-poster.webp", "contentUrl": SITE + VIDEO,
-         "uploadDate": TALK_DATE, "duration": "PT56S", "author": {"@id": SITE + "#livia"}},
+         "uploadDate": TALK_DATE, "duration": "PT16S", "author": {"@id": SITE + "#livia"}},
     ]}, separators=(",", ":"))
     problems = "\n".join(f"""      <div class="card">
         <div class="icon">{i}</div>
@@ -221,10 +221,10 @@ def page():
 <section id="talk" class="band">
   <div class="wrap split flip">
     <figure class="video">
-      <video controls preload="none" playsinline poster="images/talk-poster.webp" width="1280" height="720">
+      <video autoplay muted loop playsinline preload="metadata" poster="images/talk-poster.webp" width="960" height="540" aria-label="Me teaching a group of young players at the basketball academy">
         <source src="{VIDEO}" type="video/mp4">
       </video>
-      <figcaption>The start of my talk: the two skills, then my scrimmage story. Filmed by my mom.</figcaption>
+      <figcaption>My talk at the basketball academy, October 30.</figcaption>
     </figure>
     <div class="about-text">
       <h2>My talk at the basketball academy</h2>
@@ -315,6 +315,7 @@ def page():
   </div>
 </footer>
 
+<script>if(matchMedia('(prefers-reduced-motion: reduce)').matches)document.querySelectorAll('video[autoplay]').forEach(v=>{{v.removeAttribute('autoplay');v.pause();v.controls=true}});</script>
 </body>
 </html>
 """
