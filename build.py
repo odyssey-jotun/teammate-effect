@@ -111,9 +111,9 @@ def page():
         {"@type": "CreativeWork", "name": "How One Teammate Changes a Team", "author": {"@id": SITE + "#livia"},
          "url": SITE + HANDOUT, "encodingFormat": "application/pdf", "isAccessibleForFree": True},
         {"@type": "VideoObject", "name": "My teammate talk at the basketball academy",
-         "description": "The story I opened my talk with: the day a teammate told me to just pass the ball.",
+         "description": "The start of my talk: the two skills we would learn, then the day a teammate told me to just pass the ball.",
          "thumbnailUrl": SITE + "images/talk-poster.webp", "contentUrl": SITE + VIDEO,
-         "uploadDate": TALK_DATE, "duration": "PT1M4S", "author": {"@id": SITE + "#livia"}},
+         "uploadDate": TALK_DATE, "duration": "PT56S", "author": {"@id": SITE + "#livia"}},
     ]}, separators=(",", ":"))
     problems = "\n".join(f"""      <div class="card">
         <div class="icon">{i}</div>
@@ -224,7 +224,7 @@ def page():
       <video controls preload="none" playsinline poster="images/talk-poster.webp" width="1280" height="720">
         <source src="{VIDEO}" type="video/mp4">
       </video>
-      <figcaption>The story I opened with. Filmed by my mom.</figcaption>
+      <figcaption>The start of my talk: the two skills, then my scrimmage story. Filmed by my mom.</figcaption>
     </figure>
     <div class="about-text">
       <h2>My talk at the basketball academy</h2>
