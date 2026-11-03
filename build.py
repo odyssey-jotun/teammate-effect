@@ -224,11 +224,11 @@ def page():
       <video autoplay muted loop playsinline preload="metadata" poster="images/talk-poster.webp" width="960" height="540" aria-label="Me teaching a group of young players at the basketball academy">
         <source src="{VIDEO}" type="video/mp4">
       </video>
-      <figcaption>Teaching young players at the basketball academy.</figcaption>
+      <figcaption>Teaching young players at the basketball academy, fall of 2026.</figcaption>
     </figure>
     <div class="about-text">
       <h2>My talk at the basketball academy</h2>
-      <p>Coach Young gave me time with a group of young players at the basketball academy. My goal was for every player to leave able to spot two unhelpful teammate behaviors and replace them with a helpful phrase or action.</p>
+      <p>In the fall of 2026, Coach Young gave me time with a group of young players at the basketball academy. My goal was for every player to leave able to spot two unhelpful teammate behaviors and replace them with a helpful phrase or action.</p>
       <p>I opened with my scrimmage story. Then we went through what the research says about support and communication, picked out the unhelpful behavior in one movie clip, watched good teamwork in another, and split into three groups to work through game situations.</p>
       <p>I taught two skills: use helpful words like &ldquo;Next play&rdquo; and &ldquo;What do you need?&rdquo;, and after a mistake, reset and focus on what happens next.</p>
     </div>
